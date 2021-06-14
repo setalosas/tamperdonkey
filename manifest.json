@@ -1,9 +1,9 @@
 {
-  "name": "witchChrome.prexOnly",
+  "name": "tamperDonkey.telexOnly",
   "version": "1.0.0",
   "author": "setalosas",
   "manifest_version": 2,
-  "description": "witchChrome.prexOnly displays Chrome version (channel + build) in toolbar.",
+  "description": "tamperDonkey.telexOnly displays Chrome version (channel + build) in toolbar.",
   "browser_action": {
     "default_icon": {            
       "16": "icons/nochrome_cr.png", 

@@ -29,7 +29,7 @@ const initSiteScripts = async sitekey => {
 
   //%The scripts
     
-  scripts.pannonrex = async _ => {
+  scripts.telex = async _ => {
     const pr = {
     }
     const percentize = (arr, maxwi, fromParent = false, doCol = false) => arr.each((_, o) => {

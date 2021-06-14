@@ -34,7 +34,7 @@ const konfig = {
 }
 
 const sites = {
-  pannonrex: {type: 'include', pattern: 'pannonrex.com/demos/ganttDemo', oncomplete: true}
+  telex: {type: 'include', pattern: 'telex.hu/', oncomplete: true}
 }
 
 onReadyState().then(_ => {
@@ -55,12 +55,25 @@ onReadyState().then(_ => {
   for (const sitekey in sites) {
     const site = sites[sitekey]
     if (siteMatched(site)) {
-      console.log(`💉supermod.injector will inject supermod now on match:`, sitekey, sloc)
+      console.log(`💉supermod.injector will inject tamper now on match:`, sitekey, sloc)
       window.expo = 'hellomi!'
       document.body.setAttribute('sitekey', sitekey)
       site.oncomplete && document.body.setAttribute('oncomplete', 'true')
+
+      extensionCore()
       injectContentScript(konfig.contentScript)
       break
     }
   }
 })
+
+const extensionCore = () => {
+  // juhej!
+
+  const q$ = s => document.querySelector(s)
+  const q$$ = s => [...document.querySelectorAll(s)]
+
+  for (const img of [...q$$('img')]) {
+    img.style.border = '2px solid red'
+  }
+}
