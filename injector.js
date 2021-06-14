@@ -4,7 +4,7 @@
    standard/array-bracket-even-spacing, object-curly-newline, no-void, quotes,
    no-multiple-empty-lines */
 
-const injectContentScript = contentScript => {
+const injectContentScript = contentScript => { // ez csak akkor kell h kulso cuccot kell behivni
   const fingerPrint = 'id' + Date.now()
   const script = document.createElement('script')
   script.src = contentScript
@@ -19,7 +19,7 @@ const injectContentScript = contentScript => {
   document.head.appendChild(script)
 }
 
-const onReadyState = _ => new Promise(resolve => {
+const onReadyState = _ => new Promise(resolve => { // ez kell, mert megvarjuk h az oldal bejojjon
   document.getElementsByTagName('head').length
     ? resolve()
     : document.addEventListener('readystatechange', _ => {
@@ -29,19 +29,27 @@ const onReadyState = _ => new Promise(resolve => {
       })
   })
 
+  // ez csak ha kulso dolgot akarsz behivni
+
 const konfig = {
   contentScript: 'https://prex.mork.work/supermod-esm.js' 
 }
+
+// ez mondja meg h milyen urlmintakra akarsz triggerelni
+// ha csak egyre, a manifestben is lehet allitani a "matches" rule-ban
+// mert ost minden szajtnal lefut es itt valogatja ki, h szukseg van-e ra
 
 const sites = {
   telex: {type: 'include', pattern: 'telex.hu/', oncomplete: true}
 }
 
+// ez a lenyeg:
+
 onReadyState().then(_ => {
   const loc = window.location.href
   const sloc = loc.substr(0, 90)
   
-  const siteMatched = site => {
+  const siteMatched = site => { // ex az egesz szajtkereso resz nem kell, ha csak egy szajt van
     const {pattern} = site
     if (site.type === 'include') {
       return loc.includes(pattern)
@@ -60,7 +68,11 @@ onReadyState().then(_ => {
       document.body.setAttribute('sitekey', sitekey)
       site.oncomplete && document.body.setAttribute('oncomplete', 'true')
 
+      // ez hivja meg a kis rutint below ami piszkalja a domot
+      
       extensionCore()
+
+      // ez nem kell ha nem akarsz kulsot injektalni
       injectContentScript(konfig.contentScript)
       break
     }
